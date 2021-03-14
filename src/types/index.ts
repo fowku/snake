@@ -1,7 +1,8 @@
 import { Position } from './position';
 import { CellState } from './cellState';
-import { CellStyles } from './cellStyles';
+import { CellStyle } from './cellStyle';
 import { PlayerObject } from './playerObject';
 import { EatableItem } from './eatableItem';
+import { Direction } from './direction';
 
-export { Position, CellState, CellStyles, PlayerObject, EatableItem };
+export { Position, CellState, CellStyle, PlayerObject, EatableItem, Direction };

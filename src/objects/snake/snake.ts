@@ -2,26 +2,33 @@
 import './snake.scss';
 
 // types
-import { CellState, PlayerObject, CellStyles } from '../../types/index';
+import { PlayerObject, CellStyle, Position } from '../../types/index';
+
+// libs
+import * as Deque from 'double-ended-queue';
 
 export class Snake implements PlayerObject {
-  public readonly className: CellStyles = CellStyles.snake;
+  public readonly className: CellStyle = CellStyle.snake;
   public readonly width: number;
   public readonly height: number;
 
-  private _state: CellState[][];
+  private _positionDeque: Deque<Position>;
 
   constructor(width = 20, height = 20) {
     this.width = width;
     this.height = height;
+    this._positionDeque = new Deque<Position>([
+      { x: 4, y: 4 },
+      { x: 4, y: 5 },
+    ]);
   }
 
-  public get state(): CellState[][] {
-    return this._state;
+  public get positionDeque(): Deque<Position> {
+    return this._positionDeque;
   }
 
-  public updateState(state: CellState[][]): void {
-    this._state = state;
+  public updatePosition(position: Deque<Position>): void {
+    this._positionDeque = position;
   }
 
   // private _createSnake(): void {

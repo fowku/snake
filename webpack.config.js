@@ -1,9 +1,8 @@
 const path = require('path');
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: ['core-js', './src/index.ts'],
+  entry: ['./src/index.ts'],
 
   devServer: {
     contentBase: './dist',
@@ -43,9 +42,6 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.ProvidePlugin({
-      fetch: 'exports-loader?self.fetch!whatwg-fetch/dist/fetch.umd',
-    }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
       // favicon: './src/favicon.ico',

@@ -1,9 +1,12 @@
-import { CellState, CellStyles } from './index';
+import { CellStyles, Position } from './index';
+
+// libs
+import * as Deque from 'double-ended-queue';
 
 export interface PlayerObject {
   readonly width: number;
   readonly height: number;
   readonly className: CellStyles;
-  state: CellState[][];
-  updateState(state: CellState[][]): void;
+  positionDeque: Deque<Position>;
+  updatePosition(position: Deque<Position>): void;
 }
