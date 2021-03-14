@@ -1,3 +1,3 @@
-import { GAME_HEIGHT, GAME_WIDTH, CELL_SIZE } from './config';
+import { GAME_HEIGHT, GAME_WIDTH, CELL_SIZE, SPEED } from './config';
 
-export { GAME_HEIGHT, GAME_WIDTH, CELL_SIZE };
+export { GAME_HEIGHT, GAME_WIDTH, CELL_SIZE, SPEED };

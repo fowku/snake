@@ -2,45 +2,65 @@
 import './snake.scss';
 
 // types
-import { PlayerObject, CellStyle, Position } from '../../types/index';
+import { PlayerObject, CellStyle, Position, Direction } from '../../types/index';
 
 // libs
 import * as Deque from 'double-ended-queue';
 
 export class Snake implements PlayerObject {
   public readonly className: CellStyle = CellStyle.snake;
-  public readonly width: number;
-  public readonly height: number;
 
-  private _positionDeque: Deque<Position>;
+  private _position: Deque<Position>;
 
-  constructor(width = 20, height = 20) {
-    this.width = width;
-    this.height = height;
-    this._positionDeque = new Deque<Position>([
-      { x: 4, y: 4 },
-      { x: 4, y: 5 },
-    ]);
+  constructor(position?: Array<Position>) {
+    if (!!position) {
+      this._position = new Deque<Position>(position);
+    }
   }
 
-  public get positionDeque(): Deque<Position> {
-    return this._positionDeque;
+  public get position(): Array<Position> {
+    return this._position.toArray();
   }
 
-  public updatePosition(position: Deque<Position>): void {
-    this._positionDeque = position;
+  public updatePosition(position: Array<Position>): void {
+    this._position = new Deque<Position>(position);
   }
 
-  // private _createSnake(): void {
-  //   const snake: HTMLDivElement = this.htmlElement;
-  //   snake.className = this.SNAKE_CLASS;
+  public nextState(direction: Direction): void {
+    const headPosition = this._position.peekFront();
+    this._position.pop();
 
-  //   for (let i = 0; i < this.width; i++) {
-  //     for (let j = 0; j < this.height; j++) {
-  //       const cell = document.createElement('div');
-  //       cell.className = this.SNAKE_CLASS + this.SEGMENT_CLASS;
-  //       snake.appendChild(cell);
-  //     }
-  //   }
-  // }
+    switch (direction) {
+      case Direction.RIGHT:
+        this._position.unshift({
+          x: headPosition.x,
+          y: headPosition.y + 1,
+        });
+        break;
+
+      case Direction.DOWN:
+        this._position.unshift({
+          x: headPosition.x + 1,
+          y: headPosition.y,
+        });
+        break;
+
+      case Direction.LEFT:
+        this._position.unshift({
+          x: headPosition.x,
+          y: headPosition.y - 1,
+        });
+        break;
+
+      case Direction.UP:
+        this._position.unshift({
+          x: headPosition.x - 1,
+          y: headPosition.y,
+        });
+        break;
+
+      default:
+        throw new Error('Direction type error.');
+    }
+  }
 }
