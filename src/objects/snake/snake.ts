@@ -22,13 +22,24 @@ export class Snake implements PlayerObject {
     return this._position.toArray();
   }
 
+  public get head(): Position {
+    return this._position.peekFront();
+  }
+
+  public get tail(): Position {
+    return this._position.peekBack();
+  }
+
   public updatePosition(position: Array<Position>): void {
     this._position = new Deque<Position>(position);
   }
 
-  public nextState(direction: Direction): void {
+  public nextState(direction: Direction, skipPop = false): void {
     const headPosition = this._position.peekFront();
-    this._position.pop();
+
+    if (!skipPop) {
+      this._position.pop();
+    }
 
     switch (direction) {
       case Direction.RIGHT:
@@ -60,7 +71,7 @@ export class Snake implements PlayerObject {
         break;
 
       default:
-        throw new Error('Direction type error.');
+        throw new Error('Direction type error');
     }
   }
 }

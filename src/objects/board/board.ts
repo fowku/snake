@@ -35,7 +35,11 @@ export class Board<P extends PlayerObject, E extends EatableItem> {
     }
 
     for (let i = 0; i < flatState.length; i++) {
-      cells[i].className = this._getClassForCellState(flatState[i]);
+      const newClass = this._getClassForCellState(flatState[i]);
+
+      if (cells[i].className !== newClass) {
+        cells[i].className = newClass;
+      }
     }
   }
 
