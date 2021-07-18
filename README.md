@@ -1,6 +1,6 @@
 # Snake Game 🐍
 
-This is simple snake game.
+This is a simple snake game.
 
 ## Available Scripts
 
